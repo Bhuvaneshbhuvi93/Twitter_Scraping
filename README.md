@@ -1,6 +1,4 @@
-The project is a Twitter scraping tool that uses snscrape, a command-line utility for scraping various social media platforms. The tool allows users to collect tweets from Twitter and save them to a local file for further analysis.
-
-The main problem this project solves is the ability to obtain tweets from twitter programmatically, thus it can be used for various use cases such as sentiment analysis, analyzing trends, tracking social media influencers, etc.
+Twitter Scraping Tool using snscrape
 
 The project uses snscrape, a powerful open-source command-line utility that allows scraping various social media platforms including Twitter. It runs on Python 3 and requires no additional dependencies. The tool can be used to collect tweets by user, by hashtag, by keywords, by location, and more.
 
