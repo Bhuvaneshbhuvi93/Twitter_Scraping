@@ -1,6 +1,6 @@
 # Twitter Scraping Tool
 
-A tool that allows users to scrape tweets from Twitter using snscrape and store them in MongoDB for further analysis. The tool also provides a GUI built with Streamlit for easy access to the scraped data.
+This project allows you to collect tweets for a specific keyword or hashtag, within a given date range and a limit of tweets to be scraped. The project is built using Python and the popular libraries streamlit, pandas, and pymongo..
 
 ## Prerequisites
 
