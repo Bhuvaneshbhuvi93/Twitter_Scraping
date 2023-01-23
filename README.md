@@ -1,4 +1,4 @@
-# Twitter Scraping Tool
+# Twitter Scraping using Streamlit
 
 This project allows you to collect tweets for a specific keyword or hashtag, within a given date range and a limit of tweets to be scraped. The project is built using Python and the popular libraries ***'streamlit', 'pandas', and 'pymongo'***..
 
