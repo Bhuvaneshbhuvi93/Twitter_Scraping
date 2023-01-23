@@ -1,60 +1,79 @@
 # Twitter Scraping Tool
 
-This project allows you to collect tweets for a specific keyword or hashtag, within a given date range and a limit of tweets to be scraped. The project is built using Python and the popular libraries streamlit, pandas, and pymongo..
+This project allows you to collect tweets for a specific keyword or hashtag, within a given date range and a limit of tweets to be scraped. The project is built using Python and the popular libraries ***'streamlit', 'pandas', and 'pymongo'***..
 
 ## Prerequisites
 
-Python 3.8 and more
-snscrape
-pandas
-pymongo
-streamlit
-Installation
+* Python 3.8 and more
+
+* snscrape
+
+* pandas
+
+* pymongo
+
+* streamlit
+
+* Installation
+
 First, ensure that you have Python 3.x installed on your machine.
 
 Install the required packages by running the following command:
 
+```
+pip install snscrape 
+pip instal pandas 
+pip install pymongo 
+pip install streamlit
+```
+## Workflow
 
-pip install snscrape pandas pymongo streamlit
-Clone the repository and navigate to the project directory.
+***Scrape tweets:*** The user inputs their desired keyword or hashtag, date range, and tweet limit into the interface created by **streamlit**. The tweets are then scraped using the function module's **twitter_scraper** function which takes in these inputs and uses the **sntwitter** library to scrape tweets from Twitter based on the given keyword or hashtag within the given date range and limited to the given number of tweets.
+```
+def twitter_scraper(hastag, limit, start_date, end_date):
+    tweet_list = []
+    for i,tweet in enumerate(sntwitter.TwitterSearchScraper(f'{hastag} since:{start_date} until:{end_date}').get_items()):
+        data = [
+            tweet.date,
+            tweet.user.username,
+            tweet.rawContent,
+            tweet.lang,
+            tweet.viewCount,
+            tweet.replyCount,
+            tweet.likeCount,
+            tweet.retweetCount,
+        ]
+        tweet_list.append(data)
+        if i > limit:
+            break
+            
+    return tweet_list
+```
 
-## Twitter Scraping using snscrape
+***Create Dataframe:*** The scraped tweets are then converted into a Dataframe using the function **create_dataframe** function. This function takes in the scraped tweets as a list of lists and converts it into a Dataframe using the **pandas** library. The Dataframe contains columns such as 'Date Time', 'Tweet id', 'Tweet Content', 'Username', 'Tweet Language', 'Tweet Views', 'Reply Count', 'like Count', 'Retweet Count'
+```
+def create_dataframe(tweet_list):
+    tweet_data = pd.DataFrame(tweet_list, columns = [
+        'Date Time',
+        'Username',
+        'Tweet Content',
+        'Tweet Language',
+        'Tweet Views',
+        'Reply Count',
+        'like Count',
+        'Retweet Count',
+    ]
+                             )
+    return tweet_data
+```
 
-To scrape tweets, you will need to run the script scrape_tweets.py from the command line and provide the following inputs:
+***Streamlit GUI:*** The scraped dataframe is then displayed in the Streamlit GUI. The GUI contains the feature to enter the keyword or Hashtag to be searched, select the date range and limit the tweet count need to be scraped.
 
-Twitter username, hashtag or keywords: You will need to provide the username, hashtag or keywords for which you want to collect tweets.
-Number of tweets: The number of tweets you want to collect.
-The tweets will be saved in json format in the data folder with the name scraped_tweets.json
+***Upload to MongoDB:*** The user can then upload the Dataframe to a MongoDB database for further analysis. The user can use the interface to click the 'Upload to MongoDB' button. This button invokes the code which exports the Dataframe to a json format and then uses the pymongo library to connect to a MongoDB instance and stores the data into the database.
 
-Note: The tool uses twitter search API, thus it will only provide tweets from the last 7 days. Also, twitter API has a rate limit, so you may need to wait for some time before running the script again.
+***Download as CSV:*** The user can also download the Dataframe as a CSV file for easy storage and manipulation. The user can use the interface to click the 'Download as CSV' button. This button invokes the code which exports the Dataframe to a csv format and then uses the base64 library to encode the csv data and then creates a link which can be used to download the csv file
 
-##Creating a Dataframe with Scraped Data
-
-Run the script create_dataframe.py to convert the scraped tweets into a dataframe.
-
-The dataframe will be saved in the data folder with the name scraped_tweets.csv
-
-## Storing Data in MongoDB
-
-Make sure that you have MongoDB installed and running on your machine.
-
-Run the script store_data.py to store the dataframe into MongoDB.
-
-The data will be stored in the twitter collection of the twitterdb database.
-
-##Creating a GUI using Streamlit
-Run the script gui.py to launch the GUI.
-
-The GUI allows users to interact with the data stored in MongoDB and search for tweets by username, hashtag or keywords.
-
-Use the dropdown menus to select the desired options and press Search.
-
-## Conclusion
-The tool allows users to scrape tweets from Twitter using snscrape and store them in MongoDB for further analysis. The tool also provides a GUI built with Streamlit for easy access to the scraped data.
-
-Please let me know if you have any questions or need further clarification.
-
-Please note that this is just a sample README file and you may need to adjust it to your specific project.
+***Download as JSON:*** The user can also download the Dataframe
 
 
 
