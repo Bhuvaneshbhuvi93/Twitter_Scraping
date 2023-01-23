@@ -75,6 +75,25 @@ def create_dataframe(tweet_list):
 
 ***Download as JSON:*** The user can also download the Dataframe
 
+## Setup and Execution
 
+***Clone the repository:*** Clone the repository to your local machine using the following command:
+```
+git clone https://github.com/<username>/twitter-scraper.git
 
+```
+***Install the dependencies:*** Install the required dependencies using the following command:
+```
+pip install -r requirements.txt
 
+```
+***Run the application:*** Run the application using the following command:
+```
+streamlit run main.py
+```
+Access the application: The application will be available at **`http://localhost:8501/`**
+
+## Note
+* The mongodb should be running on your local machine in order to use the upload to mongodb functionality
+* Before scraping please make sure you've read the terms of service of a website before scraping its data to ensure that you're not violating any rules.
+Please let me know if you have any other question or need more information.
