@@ -69,6 +69,10 @@ def create_dataframe(tweet_list):
 
 3.**Streamlit GUI:** The scraped dataframe is then displayed in the Streamlit GUI. The GUI contains the feature to enter the keyword or Hashtag to be searched, select the date range and limit the tweet count need to be scraped.You can refer streamlit code in **`# GUI.py`**
 
+   ### Demo Video
+   https://user-images.githubusercontent.com/118096816/215035843-e6fc27a3-b631-41b6-bb3f-f44a796813fd.mp4
+
+
 4.**Upload to MongoDB:** The user can then upload the Dataframe to a MongoDB database for further analysis. The user can use the interface to click the 'Upload to MongoDB' button. This button invokes the code which exports the Dataframe to a json format and then uses the pymongo library to connect to a MongoDB instance and stores the data into the database.
 
 5.**Download as CSV:** The user can also download the Dataframe as a CSV file for easy storage and manipulation. The user can use the interface to click the 'Download as CSV' button. This button invokes the code which exports the Dataframe to a csv format and then uses the base64 library to encode the csv data and then creates a link which can be used to download the csv file
